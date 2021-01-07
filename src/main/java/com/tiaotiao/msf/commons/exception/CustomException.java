@@ -1,5 +1,8 @@
 package com.tiaotiao.msf.commons.exception;
 
+/**
+ * @author hansiyuan
+ */
 public class CustomException extends RuntimeException {
     /**
      * 异常错误编码

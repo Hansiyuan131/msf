@@ -29,7 +29,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig  extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
     MyLogoutSuccessHandler myLogoutSuccessHandler;
@@ -50,24 +50,24 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .ignoringAntMatchers("/authentication")
-             .and().cors().and()
-             .addFilterBefore(jwtAuthenticationTokenFilter,UsernamePasswordAuthenticationFilter.class)
-             .logout()
+                .and().cors().and()
+                .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
+                .logout()
                 .logoutUrl("/signout")
                 //.logoutSuccessUrl("/login.html")
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(myLogoutSuccessHandler)
-             .and().rememberMe()
+                .and().rememberMe()
                 .rememberMeParameter("remember-me-new")
                 .rememberMeCookieName("remember-me-cookie")
                 .tokenValiditySeconds(2 * 24 * 60 * 60)
                 .tokenRepository(persistentTokenRepository())
-             .and()
-             .authorizeRequests()
-                .antMatchers("/authentication","/refreshtoken").permitAll()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/authentication", "/refreshtoken").permitAll()
                 .antMatchers("/index").authenticated()
                 .anyRequest().access("@rabcService.hasPermission(request,authentication)")
-             .and().sessionManagement()
+                .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     }
@@ -80,7 +80,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -88,11 +88,11 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         //将项目中静态资源路径开放出来
         web.ignoring()
-           .antMatchers( "/css/**", "/fonts/**", "/img/**", "/js/**");
+                .antMatchers("/css/**", "/fonts/**", "/hello", "/img/**", "/js/**");
     }
 
     @Bean
-    public PersistentTokenRepository persistentTokenRepository(){
+    public PersistentTokenRepository persistentTokenRepository() {
 
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
         tokenRepository.setDataSource(datasource);
@@ -111,8 +111,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8888"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:10001"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
         configuration.applyPermitDefaultValues();
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

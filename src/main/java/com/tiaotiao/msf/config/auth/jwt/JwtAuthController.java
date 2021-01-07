@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.Map;
 
+/**
+ * @author hansiyuan
+ */
 @RestController
 public class JwtAuthController {
 
@@ -41,5 +44,4 @@ public class JwtAuthController {
     public  AjaxResponse refresh(@RequestHeader("${jwt.header}") String token){
             return AjaxResponse.success(jwtAuthService.refreshToken(token));
     }
-
 }

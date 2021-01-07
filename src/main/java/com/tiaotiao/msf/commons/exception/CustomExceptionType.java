@@ -1,5 +1,9 @@
 package com.tiaotiao.msf.commons.exception;
 
+/**
+ * @author hansiyuan
+ */
+
 public enum CustomExceptionType {
 
   USER_INPUT_ERROR(400,"您输入的数据格式错误或您没有权限访问资源！"),

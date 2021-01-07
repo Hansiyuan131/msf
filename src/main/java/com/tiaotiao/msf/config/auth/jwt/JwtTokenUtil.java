@@ -12,6 +12,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author hansiyuan
+ */
 @Data
 @ConfigurationProperties(prefix = "jwt")
 @Component
@@ -102,7 +105,7 @@ public class JwtTokenUtil {
 
 
     /**
-     * 从claims生成令牌,如果看不懂就看谁调用它
+     * 从claims生成令牌
      *
      * @param claims 数据声明
      * @return 令牌
@@ -116,7 +119,7 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 从令牌中获取数据声明,如果看不懂就看谁调用它
+     * 从令牌中获取数据声明
      *
      * @param token 令牌
      * @return 数据声明
